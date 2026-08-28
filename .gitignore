@@ -1,0 +1,6 @@
+/node_modules/
+/vendor/
+/.wp-env.override.json
+/od-shuffle-block.zip
+/.DS_Store
+/.phpcs-cache

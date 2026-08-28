@@ -1,0 +1,24 @@
+{
+  "name": "olein-jp/od-shuffle-block",
+  "description": "A WordPress plugin that provides the OD Shuffle Block.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.4",
+    "inc2734/wp-github-plugin-updater": "^3.1.17"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.2.1",
+    "wp-coding-standards/wpcs": "^3.4.1"
+  },
+  "scripts": {
+    "lint": "phpcs",
+    "format": "phpcbf"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  }
+}

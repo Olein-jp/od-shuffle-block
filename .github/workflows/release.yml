@@ -1,0 +1,72 @@
+name: Create plugin release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer:v2
+          coverage: none
+
+      - name: Verify release version
+        shell: bash
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          plugin_version="$(sed -n 's/^ \* Version:[[:space:]]*//p' od-shuffle-block.php | head -n 1)"
+          package_version="$(node -p "require('./package.json').version")"
+
+          if [[ "$tag_version" != "$plugin_version" || "$tag_version" != "$package_version" ]]; then
+            echo "Tag, plugin header, and package.json versions must match."
+            exit 1
+          fi
+
+      - name: Build release package
+        shell: bash
+        run: |
+          mkdir -p release/od-shuffle-block
+          git archive "$GITHUB_SHA" | tar -x -C release/od-shuffle-block
+          composer install \
+            --working-dir=release/od-shuffle-block \
+            --no-dev \
+            --optimize-autoloader \
+            --no-interaction \
+            --no-progress
+          rm -rf \
+            release/od-shuffle-block/.github \
+            release/od-shuffle-block/.editorconfig \
+            release/od-shuffle-block/.gitignore \
+            release/od-shuffle-block/.wp-env.json \
+            release/od-shuffle-block/.distignore \
+            release/od-shuffle-block/composer.json \
+            release/od-shuffle-block/composer.lock \
+            release/od-shuffle-block/package.json \
+            release/od-shuffle-block/package-lock.json \
+            release/od-shuffle-block/phpcs.xml.dist
+          cd release
+          zip -r ../od-shuffle-block.zip od-shuffle-block
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" od-shuffle-block.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" od-shuffle-block.zip --verify-tag --generate-notes --title "$GITHUB_REF_NAME"
+          fi
