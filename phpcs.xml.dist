@@ -4,6 +4,7 @@
 
 	<file>od-shuffle-block.php</file>
 	<file>src/shuffle/render.php</file>
+	<file>tests/phpunit</file>
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
