@@ -14,5 +14,6 @@ module.exports = async ( config ) => {
 	} );
 
 	await requestUtils.setupRest();
+	await requestUtils.activatePlugin( 'od-shuffle-block' );
 	await requestUtils.request.dispose();
 };
