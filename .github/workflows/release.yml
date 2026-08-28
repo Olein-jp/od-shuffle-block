@@ -23,6 +23,12 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
       - name: Verify release version
         shell: bash
         run: |
@@ -40,6 +46,8 @@ jobs:
         run: |
           mkdir -p release/od-shuffle-block
           git archive "$GITHUB_SHA" | tar -x -C release/od-shuffle-block
+          npm ci --prefix=release/od-shuffle-block
+          npm run build --prefix=release/od-shuffle-block
           composer install \
             --working-dir=release/od-shuffle-block \
             --no-dev \
@@ -56,7 +64,9 @@ jobs:
             release/od-shuffle-block/composer.lock \
             release/od-shuffle-block/package.json \
             release/od-shuffle-block/package-lock.json \
-            release/od-shuffle-block/phpcs.xml.dist
+            release/od-shuffle-block/phpcs.xml.dist \
+            release/od-shuffle-block/node_modules \
+            release/od-shuffle-block/src
           cd release
           zip -r ../od-shuffle-block.zip od-shuffle-block
 

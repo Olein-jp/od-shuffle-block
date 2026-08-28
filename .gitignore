@@ -1,5 +1,6 @@
 /node_modules/
 /vendor/
+/build/
 /.wp-env.override.json
 /od-shuffle-block.zip
 /.DS_Store

@@ -3,6 +3,7 @@
 	<description>PHP_CodeSniffer rules for OD Shuffle Block.</description>
 
 	<file>od-shuffle-block.php</file>
+	<file>src/shuffle/render.php</file>
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>

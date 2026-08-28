@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       OD Shuffle Block
  * Plugin URI:        https://github.com/Olein-jp/od-shuffle-block
- * Description:       Provides the foundation for the OD Shuffle Block plugin.
+ * Description:       Randomly displays one of several block combinations.
  * Version:           0.1.0
- * Requires at least: 5.9
+ * Requires at least: 6.6
  * Requires PHP:      7.4
  * Author:            Koji Kuno
  * Author URI:        https://olein-design.com
@@ -55,6 +55,17 @@ if ( ! is_readable( $od_shuffle_block_autoloader ) ) {
 
 require_once $od_shuffle_block_autoloader;
 
+/**
+ * Registers the plugin blocks from their metadata.
+ *
+ * @return void
+ */
+function od_shuffle_block_register_blocks() {
+	register_block_type_from_metadata( __DIR__ . '/build/shuffle' );
+	register_block_type_from_metadata( __DIR__ . '/build/shuffle-item' );
+}
+add_action( 'init', 'od_shuffle_block_register_blocks' );
+
 add_action(
 	'plugins_loaded',
 	static function () {
@@ -63,7 +74,7 @@ add_action(
 			'Olein-jp',
 			'od-shuffle-block',
 			array(
-				'requires'     => '5.9',
+				'requires'     => '6.6',
 				'requires_php' => '7.4',
 			)
 		);

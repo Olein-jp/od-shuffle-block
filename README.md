@@ -1,6 +1,16 @@
 # OD Shuffle Block
 
-OD Shuffle Block の WordPress プラグイン開発リポジトリです。
+OD Shuffle Block の WordPress プラグイン開発リポジトリです。複数のブロック候補を保持し、フロントエンドではそのうち1候補だけをランダムに出力します。
+
+## MVPの仕様
+
+- `OD Shuffle` の直下に任意数の `Shuffle Item` を保持
+- 各 `Shuffle Item` には任意のブロックを配置可能
+- 編集画面では1候補だけを表示し、ブロックツールバーから切り替え
+- リストビューで候補を選ぶと、編集画面の表示候補も同期
+- フロントエンドでは均等確率で選んだ1候補のHTMLだけを出力
+
+ランダム選択はサーバーでページをレンダリングするときに行われます。ページキャッシュやCDNが有効な環境では、キャッシュが更新されるまで同じ候補が表示される場合があります。
 
 ## 必要な環境
 
@@ -14,6 +24,7 @@ OD Shuffle Block の WordPress プラグイン開発リポジトリです。
 ```bash
 npm install
 composer install
+npm run build
 npm run env:start
 ```
 
@@ -26,6 +37,9 @@ npm run env:status
 npm run env:logs
 npm run env:cli -- plugin list
 npm run env:stop
+npm run build
+npm run lint:js
+npm run lint:css
 composer lint
 composer format
 ```

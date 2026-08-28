@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "od/shuffle-item",
+	"version": "0.1.0",
+	"title": "Shuffle Item",
+	"category": "design",
+	"icon": "screenoptions",
+	"description": "A candidate displayed by the OD Shuffle block.",
+	"textdomain": "od-shuffle-block",
+	"parent": [ "od/shuffle" ],
+	"supports": {
+		"html": false,
+		"inserter": false,
+		"reusable": false
+	}
+}
