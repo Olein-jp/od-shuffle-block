@@ -3,7 +3,7 @@
  * Plugin Name:       OD Shuffle Block
  * Plugin URI:        https://github.com/Olein-jp/od-shuffle-block
  * Description:       Randomly displays one of several block combinations.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Author:            Koji Kuno
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'OD_SHUFFLE_BLOCK_VERSION', '0.1.0' );
+define( 'OD_SHUFFLE_BLOCK_VERSION', '0.2.0' );
 define( 'OD_SHUFFLE_BLOCK_FILE', __FILE__ );
 
 add_action(

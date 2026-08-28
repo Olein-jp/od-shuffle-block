@@ -1,6 +1,6 @@
 {
   "name": "od-shuffle-block",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Local development environment for the OD Shuffle Block plugin.",
   "private": true,
   "scripts": {
