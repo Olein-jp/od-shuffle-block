@@ -65,8 +65,10 @@ jobs:
             release/od-shuffle-block/package.json \
             release/od-shuffle-block/package-lock.json \
             release/od-shuffle-block/phpcs.xml.dist \
+            release/od-shuffle-block/playwright.config.js \
             release/od-shuffle-block/node_modules \
-            release/od-shuffle-block/src
+            release/od-shuffle-block/src \
+            release/od-shuffle-block/tests
           cd release
           zip -r ../od-shuffle-block.zip od-shuffle-block
 

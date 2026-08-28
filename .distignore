@@ -10,4 +10,6 @@
 /package.json
 /package-lock.json
 /phpcs.xml.dist
+/playwright.config.js
 /src/
+/tests/

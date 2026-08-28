@@ -5,3 +5,6 @@
 /od-shuffle-block.zip
 /.DS_Store
 /.phpcs-cache
+/artifacts/
+/playwright-report/
+/test-results/

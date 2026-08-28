@@ -70,3 +70,36 @@ jobs:
 
       - name: Run JavaScript unit tests
         run: npm run test:unit:js -- --runInBand
+
+  e2e:
+    name: Block editor E2E tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Start WordPress
+        run: npm run env:start
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Stop WordPress
+        if: always()
+        run: npm run env:stop
